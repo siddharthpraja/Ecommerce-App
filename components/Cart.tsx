@@ -1,9 +1,10 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { MdDeleteOutline } from "react-icons/md";
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { MdDeleteOutline } from 'react-icons/md';
 
 interface Product {
-  id: any;
+  id: string | number;
   category: string;
   title: string;
   image: string;
@@ -11,13 +12,11 @@ interface Product {
 }
 
 export default function Cart() {
-  const [cart, setCart] = useState<Product[]>(
-    JSON.parse(localStorage.getItem("cart") || "[]") || []
-  );
+  const [cart, setCart] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
+    const storedCart = localStorage.getItem('cart');
     if (storedCart) {
       setCart(JSON.parse(storedCart));
     }
@@ -34,8 +33,12 @@ export default function Cart() {
 
   const handleRemove = (productId: string | number) => {
     const updatedCart = cart.filter((product) => product.id !== productId);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
     setCart(updatedCart);
+  };
+
+  const calculateTotal = () => {
+    return cart.reduce((acc, product) => acc + product.price, 0).toFixed(2);
   };
 
   return (
@@ -45,13 +48,13 @@ export default function Cart() {
         <p className="text-lg font-medium">Cart is empty</p>
       ) : (
         <ul>
-          {cart.map((product: Product) => (
+          {cart.map((product) => (
             <li
               key={product.id}
               className="flex items-center justify-between mb-4 border-b-2 border-gray-200 py-2"
             >
               <div className="flex items-center gap-4 justify-center">
-                <div className="flex items-center justify-center  w-20 h-20">
+                <div className="flex items-center justify-center w-20 h-20">
                   <img
                     src={product.image}
                     alt={product.title}
@@ -73,9 +76,7 @@ export default function Cart() {
           ))}
         </ul>
       )}
-      <p className="text-lg font-bold">
-        Total: ${cart.reduce((acc, product) => acc + product.price, 0)}
-      </p>
+      <p className="text-lg font-bold">Total: ${calculateTotal()}</p>
     </div>
   );
 }

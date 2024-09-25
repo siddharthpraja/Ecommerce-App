@@ -13,7 +13,7 @@ interface Product {
 export default async function Productspage() {
   let products: Product[] = [];
   try {
-    const response = await fetch("https://fakestoreapi.com/products");
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/products");
     const data = await response.json();
     products = data;
   } catch (error) {
