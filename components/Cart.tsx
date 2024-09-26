@@ -11,8 +11,12 @@ interface Product {
   price: number;
 }
 
+interface CartProduct extends Product {
+  quantity: number;
+}
+
 export default function Cart() {
-  const [cart, setCart] = useState<Product[]>([]);
+  const [cart, setCart] = useState<CartProduct[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,10 +39,50 @@ export default function Cart() {
     const updatedCart = cart.filter((product) => product.id !== productId);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
     setCart(updatedCart);
+    window.location.reload();
+  };
+
+  const handleAddQuantity = (productId: string | number) => {
+    const updatedCart = cart.map((product) =>
+      product.id === productId ? { ...product, quantity: product.quantity + 1 } : product
+    );
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setCart(updatedCart);
+    window.location.reload();
+  };
+
+  const handleDecreaseQuantity = (productId: string | number) => {
+    const updatedCart = cart.map((product) =>
+      product.id === productId
+        ? { ...product, quantity: Math.max(product.quantity - 1, 1) }
+        : product
+    );
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setCart(updatedCart);
+    window.location.reload();
+  };
+
+  const handleAddToCart = (product: Product) => {
+    const existingProduct = cart.find((item) => item.id === product.id);
+    if (existingProduct) {
+      const updatedCart = cart.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      setCart(updatedCart);
+    } else {
+      const newProduct: CartProduct = { ...product, quantity: 1 };
+      const updatedCart = [...cart, newProduct];
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      setCart(updatedCart);
+    }
+    window.location.reload();
   };
 
   const calculateTotal = () => {
-    return cart.reduce((acc, product) => acc + product.price, 0).toFixed(2);
+    return cart
+      .reduce((acc, product) => acc + product.price * product.quantity, 0)
+      .toFixed(2);
   };
 
   return (
@@ -63,15 +107,31 @@ export default function Cart() {
                 </div>
                 <div>
                   <h2 className="text-lg font-bold">{product.title}</h2>
-                  <p className="text-md font-medium">${product.price}</p>
+                  <p className="text-md font-medium">
+                    ${product.price} x {product.quantity}
+                  </p>
                 </div>
               </div>
-              <button
-                onClick={() => handleRemove(product.id)}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold p-2 rounded"
-              >
-                <MdDeleteOutline />
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleDecreaseQuantity(product.id)}
+                  className="bg-gray-300 hover:bg-gray-400 text-black font-bold p-2 rounded"
+                >
+                  -
+                </button>
+                <button
+                  onClick={() => handleAddQuantity(product.id)}
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold p-2 rounded"
+                >
+                  +
+                </button>
+                <button
+                  onClick={() => handleRemove(product.id)}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold p-2 rounded"
+                >
+                  <MdDeleteOutline />
+                </button>
+              </div>
             </li>
           ))}
         </ul>

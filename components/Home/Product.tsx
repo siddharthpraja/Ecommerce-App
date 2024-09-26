@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import AddtoCart from "./AddtoCart";
+import Link from "next/link";
 
 interface Product {
   id: any;
@@ -23,21 +24,21 @@ export default async function Productspage() {
   return (
     <div className="py-10">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map((product) => (
             <div
               key={product.id}
-              className="flex flex-col h-full rounded-lg items-center gap-4 p-4 shadow-md"
+              className="flex flex-col h-full items-center rounded-lg gap-4 p-4 shadow-md"
             >
-              <div className="w-full h-2/3 flex items-center justify-center">
+              <Link href={`products/${product.id}`}>
                 <Image
                   src={product.image}
                   alt={product.id}
                   width={200}
                   height={200}
-                  className="object-cover"
+                  className="object-contain aspect-square"
                 />
-              </div>
+              </Link>
               <div>
                 <h1 className="text-lg">{product.title}</h1>
                 <p>{product.category}</p>
