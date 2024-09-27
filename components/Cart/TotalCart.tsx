@@ -26,7 +26,7 @@ const CartTotal = () => {
 
         <Link
           href={"/cart"}
-          className="p-2 rounded-xl  flex gap-2 bg-white relative"
+          className="p-2 rounded-xl text-xs flex gap-2 bg-white relative"
         >
           <div className="px-[8px] py-[1px] bg-orange-500 rounded-full text-[10px] -right-2 absolute -top-2">
             {cartCount}{" "}
