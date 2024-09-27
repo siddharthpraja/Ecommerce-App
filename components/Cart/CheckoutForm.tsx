@@ -185,7 +185,7 @@ const CheckoutForm = () => {
           Submit
         </button>
       </form>
-      <div className="flex justify-between text-center items-center">
+      <div className="lg:flex hidden justify-between text-center items-center">
         <div>
         <iframe width={500} height={500}  src="https://lottie.host/embed/a8bba014-9978-4cdd-a6b3-2702ad2fc298/R1cl4S91Zw.json"></iframe>
         </div>
