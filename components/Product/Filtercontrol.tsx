@@ -45,29 +45,35 @@ const PropertyFilterControls: React.FC<PropertyFilterControlsProps> = ({
         <BiCategory size={20} />
         <select value={location} onChange={(e) => setLocation(e.target.value)}>
           <option value="">All Locations</option>
-          <option value="city">City</option>
-          <option value="suburban">Suburban</option>
-          <option value="rural">Rural</option>
+          <option value="Delhi, Delhi">Delhi</option>
+          <option value="Mumbai, Maharashtra">Mumbai</option>
+          <option value="Udaipur, Rajasthan">Udaipur</option>
+          <option value="Shimla, Himachal Pradesh">Shimla</option>
+          <option value="Bengaluru, Karnataka">Bengaluru</option>
+
         </select>
       </div>
       <div className="flex items-center gap-2">
         <GiPriceTag size={20} />
-        <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)}>
+        <select
+          value={priceRange}
+          onChange={(e) => setPriceRange(e.target.value)}
+        >
           <option value="">All Price Ranges</option>
-          <option value="0-500">$0-$500</option>
-          <option value="501-1000">$501-$1000</option>
-          <option value="1001-2000">$1001-$2000</option>
-          <option value="2001+">$2001+</option>
+          <option value="3000-4000">₹3000-₹4000</option>
+          <option value="4000-5000">₹4001-₹5000</option>
+          <option value="5001-6000">₹5001-₹6000</option>
+          <option value="6001-7000">₹6001-₹7000</option>
         </select>
       </div>
       <div className="flex items-center gap-2">
         <BiCategory size={20} />
         <select value={bedrooms} onChange={(e) => setBedrooms(e.target.value)}>
           <option value="">All Bedrooms</option>
-          <option value="1">1 Bedroom</option>
           <option value="2">2 Bedrooms</option>
           <option value="3">3 Bedrooms</option>
-          <option value="4+">4+ Bedrooms</option>
+          <option value="4">4 Bedrooms</option>
+          <option value="5">5 Bedroom</option>
         </select>
       </div>
       <div className="flex items-center gap-2">
