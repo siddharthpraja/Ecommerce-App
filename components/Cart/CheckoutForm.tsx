@@ -69,7 +69,7 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="w-full flex justify-between">
+    <div className="w-full items-center flex lg:p-8 justify-between">
       <form onSubmit={handleSubmit} className="mt-8 lg:w-1/2">
         <h2 className="text-2xl font-bold mb-4">Checkout</h2>
         <div className="mb-4">
@@ -187,9 +187,12 @@ const CheckoutForm = () => {
       </form>
       <div className="lg:flex hidden justify-between text-center items-center">
         <div>
-        <iframe width={500} height={500}  src="https://lottie.host/embed/a8bba014-9978-4cdd-a6b3-2702ad2fc298/R1cl4S91Zw.json"></iframe>
+          <iframe
+            width={500}
+            height={500}
+            src="https://lottie.host/embed/a8bba014-9978-4cdd-a6b3-2702ad2fc298/R1cl4S91Zw.json"
+          ></iframe>
         </div>
-        
       </div>
     </div>
   );

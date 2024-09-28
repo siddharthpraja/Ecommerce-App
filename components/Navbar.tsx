@@ -9,10 +9,10 @@ import CartTotal from "./Cart/TotalCart";
 const Navbar = () => {
   return (
     <div className="px-6 md:px-8 lg:px-16 2xl:px-32 top-0 z-50 sticky bg-neutral-100 overflow-hidden h-16 flex justify-between items-center">
-      <div className=" lg:flex hidden group items-center gap-4">
+      <div className=" lg:flex hidden items-center gap-4">
         <HiOutlineMenuAlt2 className="text-3xl p-1 rounded-xl  bg-white relative" />
-        <div className="group-hover:opacity-100 hidden opacity-0 lg:flex text-sm gap-4">
-          <Link href={"/products"}>Products</Link>
+        <div className="flex text-sm gap-4">
+          <Link href={"/properties"}>Properties</Link>
           <Link href={"/about"}>About us</Link>
         </div>
       </div>

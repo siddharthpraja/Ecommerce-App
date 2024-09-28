@@ -1,28 +1,30 @@
 import Hero from "@/components/Home/Hero";
-import ProductList from "@/components/Product/Product";
+import Showmore from "@/components/Home/Showmore";
+import PropertyList from "@/components/Product/PropertyList";
 
-interface Product {
-  id: any;
-  category: string;
+interface Property {
+  _id: any;
+  location: string;
   title: string;
-  image: string;
-  price: number;
+  description: string;
+  image_url: string;
+  price_per_night: number;
+  bedrooms: number;
+  amenities: string[];
+  latitude: number;
+  longitude: number;
 }
 
-export default async function Home() {
-  let products: Product[] = [];
-  try {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/products");
-    const data = await response.json();
-    products = data;
-  } catch (error) {
-    console.error("Failed to fetch products:", error);
-    products = [];
-  }
+export default async function Page() {
+
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL!);
+  const properties: Property[] = await response.json();
+
   return (
-    <div className="overflow-hidden flex items-center flex-col px-4 md:px-8 lg:px-16 2xl:px-32">
+    <div className="">
       <Hero />
-      <ProductList products={products} />
+      <Showmore />
+      <PropertyList properties={properties} />
     </div>
   );
 }

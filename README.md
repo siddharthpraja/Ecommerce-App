@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Property Filter Component
 
-## Getting Started
+This README provides an overview of the `PropertyFilter` component, its functionality, and how to integrate it into your React application.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Props](#props)
+- [Functionality](#functionality)
+- [License](#license)
+
+## Overview
+
+The `PropertyFilter` component is a React-based UI component that allows users to filter and sort a list of properties based on various criteria. It includes search functionality, location filtering, price range selection, bedroom count filtering, and sorting options.
+
+## Installation
+
+To use the `PropertyFilter` component, you need to have a React environment set up. If you haven't already, create a new React app using Create React App or your preferred method. Then, include the `PropertyFilter` component in your project.
+
+1. Install React (if not already installed):
+
+   ```bash
+   npx create-next-app my-app
+   cd my-app
+   ```
+
+2. Create a new file named `PropertyFilter.tsx` and copy the component code into it.
+
+3. Make sure to create the necessary child components (`PropertyList` and `PropertyFilterControls`).
+
+## Usage
+
+To use the `PropertyFilter` component, import it into your main component and provide it with an array of property data.
+
+```jsx
+import React from 'react';
+import PropertyFilter from './PropertyFilter';
+
+const App = () => {
+  const properties = [
+    // Array of property objects
+  ];
+
+  return (
+    <div>
+      <PropertyFilter data={properties} />
+    </div>
+  );
+};
+
+export default App;
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Props
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The `PropertyFilter` component accepts the following props:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Prop     | Type              | Description                               |
+|----------|-------------------|-------------------------------------------|
+| `data`   | `Property[]`      | An array of property objects to filter.   |
 
-## Learn More
+### Property Object Structure
 
-To learn more about Next.js, take a look at the following resources:
+Each property object should follow this structure:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```typescript
+interface Property {
+  _id: any;                 // Unique identifier
+  title: string;           // Property title
+  description: string;     // Property description
+  location: string;        // Location of the property
+  price_per_night: number; // Price per night
+  bedrooms: number;        // Number of bedrooms
+  amenities: string[];     // Array of amenities
+  image_url: string;       // Image URL for the property
+  latitude: number;        // Latitude for distance calculation
+  longitude: number;       // Longitude for distance calculation
+  distance?: number;       // Optional distance from the user
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Functionality
 
-## Deploy on Vercel
+- **Search**: Users can search for properties by title.
+- **Location Filter**: Filter properties based on the specified location.
+- **Price Range**: Filter properties by price range (e.g., "100-200").
+- **Bedrooms**: Filter properties based on the number of bedrooms.
+- **Sorting**: Sort properties by price (ascending or descending) or by distance from a hardcoded user location.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Loading State
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+While the properties are being loaded, a loading message is displayed to the user.
+
+### Distance Calculation
+
+A simple distance calculation is included, using a hardcoded user location (latitude: 37.7749, longitude: -122.4194) for demonstration purposes.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
