@@ -1,3 +1,4 @@
+import Card from "@/components/Home/Card";
 import Hero from "@/components/Home/Hero";
 import Showmore from "@/components/Home/Showmore";
 import PropertyList from "@/components/Product/PropertyList";
@@ -23,6 +24,7 @@ export default async function Page() {
   return (
     <div className="">
       <Hero />
+      <Card/>
       <Showmore />
       <PropertyList properties={properties} />
     </div>

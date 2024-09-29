@@ -80,7 +80,9 @@ const PropertyFilter: React.FC<PropertyFilterProps> = ({ data }) => {
     <div className="py-10 w-full">
       <div className="container mx-auto">
         {loading ? (
-          <div className="text-center">Loading...</div>
+          <div className="flex w-full h-screen items-center justify-center">
+            <div className="loader"/>
+          </div>
         ) : (
           <>
             <PropertyFilterControls

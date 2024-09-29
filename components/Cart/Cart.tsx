@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { MdDeleteOutline } from "react-icons/md";
 
 interface Property {
   _id: string; // Assuming _id is a string
@@ -36,7 +36,7 @@ export default function Cart() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <p className="text-lg font-bold">Loading...</p>
+        <div className="loader" />
       </div>
     );
   }
@@ -89,41 +89,48 @@ export default function Cart() {
           {cart.map((product) => (
             <li
               key={product._id}
-              className="flex items-center  justify-between mb-4 border-b-2 border-gray-200 py-2"
+              className="flex items-center flex-col md:flex-row gap-4  justify-between mb-4 border-b-2 border-gray-200 py-2"
             >
               <Link
                 href={`/properties/${product._id}`}
                 className="flex items-center gap-4 justify-center"
               >
                 <div className="flex items-center justify-center w-20 h-20">
-                  <img
+                  <Image
                     src={product.image_url}
                     alt={product.title}
-                    className="bg-cover bg-center w-full h-full"
+                    width={100}
+                    height={100}
+                    loading="eager"
+                    priority
+                    className="bg-cover aspect-square bg-center w-auto h-auto"
                   />
                 </div>
                 <div>
                   <h2 className="text-lg font-bold">{product.title}</h2>
-
-                  <p className="text-md font-medium flex gap-1 items-center">
+                  <h2 className="text-sm">{product.bedrooms} bedrooms</h2>
+                </div>
+              </Link>
+              <div className="flex w-1/2 justify-between">
+                <p className="text-md font-medium flex gap-3 items-center ">
+                  ₹{product.price_per_night} 
+                  <p>x</p>
+                  <p className="flex gap-2 items-center">
                     <button
                       onClick={() => handleDecreaseQuantity(product._id)}
-                      className="border font-bold p-1 rounded "
+                      className="border font-bold w-8 h-8 rounded "
                     >
                       -
                     </button>
-                    ₹{product.price_per_night}
+                    {product.quantity}
                     <button
                       onClick={() => handleAddQuantity(product._id)}
-                      className="border font-bold p-2 rounded"
+                      className="border font-bold  w-8 h-8  rounded"
                     >
                       +
                     </button>
-                    x {product.quantity}
                   </p>
-                </div>
-              </Link>
-              <div className="flex gap-2">
+                </p>
                 <button
                   onClick={() => handleRemove(product._id)}
                   className="text-sm  p-2 rounded"

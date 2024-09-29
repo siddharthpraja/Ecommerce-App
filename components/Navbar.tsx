@@ -18,7 +18,15 @@ const Navbar = () => {
       </div>
 
       <Link href="/">
-        <Image src={logo} width={100} height={50} className="w-14" alt="logo" />
+        <Image
+          src={logo}
+          loading="eager"
+          priority
+          width={100}
+          height={50}
+          className="w-14"
+          alt="logo"
+        />
       </Link>
       <div className="flex justify-center text-sm gap-4 items-center">
         <div className="flex items-center gap-2">
@@ -27,12 +35,11 @@ const Navbar = () => {
           </SignedOut>
           <SignedIn>
             <div className="flex gap-4">
-            <UserButton />
-            <CartTotal />
+              <UserButton />
             </div>
+            <CartTotal />
           </SignedIn>
         </div>
-        
       </div>
     </div>
   );

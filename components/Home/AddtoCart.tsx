@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
- // Import useRouter
+// Import useRouter
 
 interface Property {
   _id: string; // Use string or number instead of any
@@ -52,7 +52,7 @@ export default function AddToCart({ selectedProperty }: AddToCartProps) {
 
   return (
     <button
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+      className="border border-emerald-500 text-emerald-500 px-4 py-2 hover:bg-emerald-500 hover:text-neutral-50 font-bold   rounded text-xs"
       onClick={handleAddToCart}
       disabled={loading} // Disable button while loading
     >
